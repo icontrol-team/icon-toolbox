@@ -1,0 +1,38 @@
+{
+  "name": "icon-toolbox",
+  "version": "0.0.1",
+  "description": "icon toolbox",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./index.html --host 0.0.0.0 --port 8000",
+    "build": "parcel build ./index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "icontrol",
+    "icon"
+  ],
+  "author": "James <icontrol.b@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@hyperapp/router": "^0.7.1",
+    "app.css": "^0.1.2",
+    "axios": "^0.19.2",
+    "axios-progress-bar": "^1.2.0",
+    "big-integer": "^1.6.48",
+    "bigfloat.js": "^2.0.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "highlight.js": "^10.1.1",
+    "hyperapp": "^1.2.9",
+    "hyperapp-styled-components": "^0.1.0",
+    "icon-sdk-js": "0.0.18",
+    "lib": "^4.2.0",
+    "parcel": "^1.12.4",
+    "qrcode-with-logos": "^1.0.2",
+    "react-dom": "^16.13.1",
+    "regenerator-runtime": "^0.13.2",
+    "request": "^2.88.2",
+    "then-request": "^6.0.2"
+  }
+}
