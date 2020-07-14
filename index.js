@@ -1,7 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import { h, app, vdom } from "hyperapp";
 import { Link, Route, location, Switch } from "@hyperapp/router";
-import axios from 'axios';
 const icx_utils = require("./lib/icx-utils");
 import IconService, { IconAmount, IconWallet, IconConverter, HttpProvider, IconBuilder } from 'icon-sdk-js';
 import styled from 'hyperapp-styled-components';
@@ -48,11 +47,8 @@ const actions = {
     gen_qrcode: ( is_random=false ) => (state, actions) => {
         let val = "is_random -> " + is_random;
         if (is_random === true) {
-            // document.getElementById("address").value = icx_utils.random_wallet();
-            // document.getElementById("amount").value = icx_utils.getRandomInt(1,10);
             putIdValue('address', icx_utils.random_wallet());
             putIdValue('amount', icx_utils.getRandomInt(1,10));
-
         }
         let qrcode_url = icx_utils.reload_qrcode();
         actions.logging("address: "+ document.getElementById("address").value + " / amount:"+ document.getElementById("amount").value);
@@ -62,7 +58,6 @@ const actions = {
     },
     gen_table: (data, caption=null) => (state, actions) =>{
         content_remove_element("result");
-        console.log("caption="+caption);
         generate_table("table","result", data, caption);
     },
     getIISSinfo: () => (state, actions) => {
@@ -70,10 +65,7 @@ const actions = {
             actions.logging('getIISSinfo');
             icx_utils.call_api("getIISSInfo", true).then(function(data) {
                 icx_utils.logging_msg("getIISSinfo = ",JSON.stringify(data,undefined,4) );
-                // actions.update_time();
                 let left_block = state.timestamp + (data.result.nextPRepTerm-data.result.blockHeight)*2 ;
-                console.log(icx_utils.unixtime2date(left_block));
-
                 actions.gen_table({
                     nextCalculation: icx_utils.hex_to_int(data.result.nextCalculation, true, false),
                     blockHeight: icx_utils.hex_to_int(data.result.blockHeight,true,false),
@@ -94,9 +86,7 @@ const actions = {
                     TotalSupplyOrg: icx_utils.bigInteger(data.result, true),
                     TotalSupply: icx_utils.hex_to_int(data.result, true)
                 });
-
             });
-
         } catch (error) {
             actions.error(error);
         }
