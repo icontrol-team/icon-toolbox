@@ -30,7 +30,6 @@
     "lib": "^4.2.0",
     "parcel": "^1.12.4",
     "qrcode-with-logos": "^1.0.2",
-    "react-dom": "^16.13.1",
     "regenerator-runtime": "^0.13.2",
     "request": "^2.88.2",
     "then-request": "^6.0.2"

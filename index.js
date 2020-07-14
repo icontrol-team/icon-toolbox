@@ -574,7 +574,7 @@ function changed_setting(e=null){
     if (e) {
         window.localStorage.setItem("last_network", e.target.value);
     }
-    content_remove_element("setting_table");
+    content_remove_element("setting_result");
     generate_table("setting_table","setting_result", icx_utils.flatten(icx_utils.get_last_setting()));
 }
 
