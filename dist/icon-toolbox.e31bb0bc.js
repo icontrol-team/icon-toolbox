@@ -51882,6 +51882,7 @@ function changed_setting() {
     window.localStorage.setItem("last_network", e.target.value);
   }
 
+  content_remove_element("setting_table");
   generate_table("setting_table", "setting_result", icx_utils.flatten(icx_utils.get_last_setting()));
 }
 
