@@ -10,7 +10,7 @@ All functions are implemented in javascript and can be executed without a server
 ![exec_donate](img/icon-toolbox.gif)
 
 
-###Support functions
+### Support functions
 1. Generate to QR-CODE
 2. Unit Converter 
     > Number <-> Hex <br>
@@ -20,15 +20,24 @@ All functions are implemented in javascript and can be executed without a server
 3. Call ICON's API
     > getIISSinfo , icx_getTotalSupply, icx_getLastBlock, icx_getBalance <br>
     icx_getTransactionResult, icx_getTransactionByHash <br>
-    icx_getBlockByHeight
+    icx_getBlockByHeight 
 
+    > Post data is created using axios and then transmitted. Supported APIs will be added. <br>
+    You can change the network settings through selectbox.
+                                                                                                                                                                                           
 4. Key generator
-
-
 
 
 ### How to build
 
-`npm install --save`
-`npm run build`
-`npm start`
+```bash
+$ npm install --save
+$ npm run build
+$ npm start
+
+```
+
+
+### Reference
+
+https://www.icondev.io/docs/icon-json-rpc-v3
