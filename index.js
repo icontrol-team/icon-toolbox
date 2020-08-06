@@ -51,9 +51,15 @@ const state = {
 
 class iconTemplateMethod {
     constructor() {
-        if (getKeystore()) {
-            this.key_address = getKeystore().address
+        try {
+
+            this.key_address = getKeystore2().address
+
+        }catch(e) {
+            this.key_address = "null";
+            console.log(e)
         }
+
         this.template =  {
             "IISS": {
                 "getIISSInfo": create_payload("getIISSInfo", {}, "icx_call") ,
@@ -199,7 +205,7 @@ const actions = {
         let json_rpc = editor_obj.get();
         delete json_rpc.params.signature;
         json_rpc.params.nid = json_rpc.params.nid || getNetwork().nid;
-        json_rpc.params.from = json_rpc.params.from || getKeystore().address;
+        json_rpc.params.from = getKeystore().address;
         json_rpc.params.to = json_rpc.params.to || "hx32b5704b766c535c34291c0d10ddd5bbd7b6b9fb";
         json_rpc.params.nonce = json_rpc.params.nonce || icx_utils.getRandomHex();
         json_rpc.params.stepLimit = json_rpc.params.stepLimit || "0xf4240";
@@ -455,7 +461,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;    
   max-height:99%;
   position: fixed;
-  top: 145px;
+  top: 240px;
 `;
 
 const TextArea = styled.textarea`
@@ -511,7 +517,7 @@ const Logging = styled.div`
   word-wrap: break-word;
   padding: 10px 10px 10px 10px;
   bottom: 50px;
-  top: 190px;
+  top: 110px;
   right: 0px;
   overflow: scroll;
   overflow-x: hidden;
@@ -558,8 +564,7 @@ const SettingPage = styled.fieldset`
   font-family: Aria;
   position: absolute;
   word-wrap: break-word;
-  padding: 0px 10px 10px 10px;
-  bottom: 50px;
+  padding: 0px 10px 10px 10px;  
   top: 0px;
   right: 0px;
   overflow: scroll;
@@ -569,18 +574,16 @@ const SettingPage = styled.fieldset`
 
 const Setting = styled.fieldset`
   border: 1px solid #ccc;
-  
   margin: 0px 10px;
   font-family: Aria;
-  
   word-wrap: break-word;
   padding: 0px 10px 10px 10px;
-  
+  margin-top: 10px; 
   top: 0px;
   right: 0px;
   overflow: scroll;
   overflow-x: hidden;
-  font-size: 13px;
+  font-size: 13px;  
 `;
 
 
@@ -649,31 +652,8 @@ const navi_element = (pathname, menu_name, state_loc) => {
 const Code = () => (state, actions, v = page_in(state)) => (
 <div style="width: 100%;">
     <Column style="width:45%">
-    <h1>ICON-ToolBox</h1>
-    <small style="margin-top: -15px"> powered by  <a href="http://icontrol.id" target="_blank">ICONTROL</a></small>
-    {/*    <Setting >*/}
-    {/*        <legend> Settings</legend>*/}
-    {/*        <Title> network: </Title>*/}
-    {/*        <select style="width:160px" className="tight" onChange={e => {*/}
-    {/*            changed_setting(e)*/}
-    {/*        }} id="network">{*/}
-    {/*            Object.keys(state.network_info).map((v, i) =>*/}
-    {/*                state.last_network === v ? (<option value={v} selected>{v}</option>)*/}
-    {/*                    : (<option value={v}> {v}</option>)*/}
-    {/*            )*/}
-    {/*        }</select>*/}
-    {/*        <select style="width:140px" className="tight" onChange={e => {*/}
-    {/*            changed_setting(e)*/}
-    {/*        }} id="keystore_sel">{*/}
-    {/*            Object.keys(state.keystore_info).map((v, i) =>*/}
-    {/*                (<option value={v}>{v} &nbsp;<small style="font-style: italic;"> {state.keystore_info[v].address}</small></option>)*/}
-    {/*            )*/}
-    {/*        }</select>*/}
-    {/*         <div id="setting" >*/}
-    {/*         </div>*/}
-    {/*        <div id="setting_result" style="overflow-x: scroll; height:140px"> </div>*/}
-    {/*    </Setting>*/}
-
+    {/*<h1>ICON-ToolBox</h1>*/}
+    {/*<small style="margin-top: -15px"> powered by  <a href="http://icontrol.id" target="_blank">ICONTROL</a></small>*/}
         <Column id="cssmenu">
             <Navigation >
                 {navi_element("/units", "Units", state.location.pathname)}
@@ -682,6 +662,29 @@ const Code = () => (state, actions, v = page_in(state)) => (
                 {navi_element("/keys", "Keys", state.location.pathname)}
             </Navigation>
         </Column>
+
+        <Setting id="setting" >
+            <legend> Settings</legend>
+            <Title> network: </Title>
+            <select style="width:160px" class="tight" onchange={e => {
+                changed_setting(e)
+            }} id="network">{
+                Object.keys(state.network_info).map((v, i) =>
+                    state.last_network === v ? (<option value={v} selected>{v}</option>)
+                        : (<option value={v}> {v}</option>)
+                )
+            }</select>
+            <select style="width:140px" class="tight" onchange={e => {
+                getKeystore(e)
+            }} id="keystore_sel">{
+                Object.keys(state.keystore_info).map((v, i) =>
+                    (<option value={v}>{v} &nbsp;<small style="font-style: italic;"> {state.keystore_info[v].address}</small></option>)
+                )
+            }</select>
+            <div id="setting" >
+            </div>
+            <div id="setting_result" style="overflow-x: scroll; height:90px"> </div>
+        </Setting>
     </Column>
     <Wrapper>
         <Column style="display: flex; flex-direction: column; width: 100%;overflow:auto;">
@@ -796,7 +799,30 @@ const Code = () => (state, actions, v = page_in(state)) => (
               <h4>Key Tools</h4>
             </div>
           )} />
+
+            {/*<Route path="/simple_sender" render={() => () => (*/}
+            {/*    <div>*/}
+            {/*        <h4>Simple sender</h4>*/}
+            {/*        <InputBox type="text" style="width:96%" id="simple_sender_address"  placeholder="To Address" onkeyup={*/}
+            {/*            e => {*/}
+
+            {/*            }*/}
+            {/*        }*/}
+            {/*        />*/}
+
+            {/*        <InputBox type="text" style="width:96%" id="simple_sender_amount"  placeholder="Amount" onkeyup={*/}
+            {/*            e => {*/}
+
+            {/*            }*/}
+            {/*        }*/}
+            {/*        />*/}
+
+            {/*        <Button style="" onclick={simple_sender}>send icx</Button>*/}
+            {/*    </div>*/}
+            {/*)} />*/}
+
         </div>
+
             <div style={state.location.pathname === "/keys" ? "display:block" : "display:none"}>
                 <ul id="keystore_layer" className="collapse-list" >
                     <li>
@@ -878,24 +904,27 @@ const Code = () => (state, actions, v = page_in(state)) => (
       </Column>
     </Wrapper>
     <SettingPage id="setting">
-            <legend> Settings </legend>
-            <Title> network: </Title>
-            <select style="width:160px" class="tight" onchange={e=>{ changed_setting(e) }}  id="network">{
-                Object.keys(state.network_info).map((v, i) =>
-                    state.last_network === v ? (<option value={v} selected>{v}</option>)
-                        : (<option value={v}> {v}</option>)
-                )
-            }</select>
-            <select style="width:140px" className="tight" onChange={e => { changed_setting(e) }} id="keystore_sel">{
-                Object.keys(state.keystore_info).map((v, i) =>
-                    (<option value={v}>{v} &nbsp;<small style="font-style: italic;"> {state.keystore_info[v].address}</small></option>)
-                )
-            }</select>
+        <legend> Logging</legend>
+        <h1>ICON-ToolBox</h1>
+        <small style="margin-top: -15px"> powered by  <a href="http://icontrol.id" target="_blank">ICONTROL</a></small>
+            {/*<legend> Settings </legend>*/}
+            {/*<Title> network: </Title>*/}
+            {/*<select style="width:160px" class="tight" onchange={e=>{ changed_setting(e) }}  id="network">{*/}
+            {/*    Object.keys(state.network_info).map((v, i) =>*/}
+            {/*        state.last_network === v ? (<option value={v} selected>{v}</option>)*/}
+            {/*            : (<option value={v}> {v}</option>)*/}
+            {/*    )*/}
+            {/*}</select>*/}
+            {/*<select style="width:140px" className="tight" onChange={e => { changed_setting(e) }} id="keystore_sel">{*/}
+            {/*    Object.keys(state.keystore_info).map((v, i) =>*/}
+            {/*        (<option value={v}>{v} &nbsp;<small style="font-style: italic;"> {state.keystore_info[v].address}</small></option>)*/}
+            {/*    )*/}
+            {/*}</select>*/}
 
-             <div id="setting" >
-            </div>
+            {/* <div id="setting" >*/}
+            {/*</div>*/}
 
-            <div id="setting_result" style="overflow-x: scroll; height:140px"> </div>
+            {/*<div id="setting_result" style="overflow-x: scroll; height:140px"> </div>*/}
 
     </SettingPage>
 
@@ -954,7 +983,6 @@ function changed_setting(e=null){
         window.localStorage.setItem("last_network", e.target.value);
     }
     content_remove_element("setting_result");
-    //
     generate_table("setting_table",
                     "setting_result",
 
@@ -1095,12 +1123,47 @@ function convert_hex_form(e){
     }
 }
 
-function getKeystore(){
+function getKeystore(e=undefined){
     if (getId("keystore_sel")) {
         let sel_val = getIdValue("keystore_sel");
-        return state.keystore_info[sel_val];
+        let selected_key;
+        try{
+            if (sel_val) {
+                selected_key = state.keystore_info[sel_val];
+                if (e) {
+                    logging_msg("getKeystore() Change keystore = " + sel_val + " / " + selected_key.address, e);
+                }else{
+                    logging_msg("getKeystore() Change keystore = " + sel_val + " / " + selected_key.address);
+                }
+            }
+        } catch (e) {
+            logging_msg(e);
+        }
+        return selected_key;
     }
 }
+
+function getKeystore2(e=undefined){
+    if (getId("keystore_sel")) {
+        let sel_val = getIdValue("keystore_sel");
+        let selected_key;
+        try{
+            if (sel_val) {
+                selected_key = state.keystore_info[sel_val];
+                if (e) {
+                    logging_msg("getKeystore2() Change keystore = " + sel_val + " / " + selected_key.address, e);
+                }else{
+                    logging_msg("getKeystore2() Change keystore = " + sel_val + " / " + selected_key.address);
+                }
+            }
+        } catch (e) {
+            logging_msg(e);
+        }
+        return selected_key;
+    }
+}
+
+
 
 
 function getNetwork(){
@@ -1124,12 +1187,46 @@ function waitForDomReady() {
         window.requestAnimationFrame(waitForDomReady);
     }else {
         changed_setting();
-        logging_msg("keystore: "+ getKeystore().address);
+        // logging_msg("keystore: "+ getKeystore().address);
         if (icx_utils.getClass('jsoneditor-poweredBy')) {
             icx_utils.getClass("jsoneditor-poweredBy").item(0).remove();
         }
     }
 }
 
+function simple_sender() {
+    // let json_rpc = editor_obj.get();
+    let json_rpc = new iconTemplateMethod().get("icx_sendTransaction");
+    if (!getIdValue("simple_sender_address")) {
+        logging_msg("[ERROR] To address not found")
+        return
+    }
+
+    if (!getIdValue("simple_sender_amount")) {
+        logging_msg("[ERROR] value not found")
+        return
+    }
+
+    delete json_rpc.params.signature;
+    json_rpc.params.nid = json_rpc.params.nid || getNetwork().nid;
+    json_rpc.params.from = getKeystore().address;
+    json_rpc.params.to =  getIdValue("simple_sender_address")|| "";
+    json_rpc.params.nonce = json_rpc.params.nonce || icx_utils.getRandomHex();
+    json_rpc.params.stepLimit = json_rpc.params.stepLimit || "0xf4240";
+    json_rpc.params.version = json_rpc.params.version || "0x3";
+    json_rpc.params.timestamp = icx_utils.nowUnixtimeHex();
+    json_rpc.params.value = getIdValue("simple_sender_amount")  || "0x38d7ea4c68000";
+    let wallet = IconWallet.loadPrivateKey(getKeystore().pk);
+
+    if (json_rpc.params.dataType === "message") {
+        json_rpc.params.data = icx_utils.StringtoHex(json_rpc.params.data);
+    }
+    // logging_msg(wallet);
+    // let signature = wallet.sign(serialize(editor_obj.get()));
+    let signature = wallet.sign(serialize(json_rpc.params));
+    logging_msg("signature", signature);
+    json_rpc.params.signature = signature;
+    logging_msg("JSON", json_rpc);
+}
 
 waitForDomReady();

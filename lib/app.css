@@ -130,6 +130,7 @@ legend {
     padding: 0px;
 }
 .h1, .leader, h1 {
+    font-family: "Helvetica Neue";
     font-weight: 100;
     font-size: 3rem;
     margin: 10px 0px 10px 0px;
