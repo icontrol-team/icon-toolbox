@@ -10,12 +10,12 @@
   },
   "keywords": [
     "icontrol",
-    "icon"
+    "icon-toolbox"
   ],
   "author": "James <icontrol.b@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@hyperapp/router": "0.7.2",
+    "@hyperapp/router": "^0.7.2",
     "app.css": "^0.1.2",
     "axios": "^0.19.2",
     "big-integer": "^1.6.48",
@@ -25,15 +25,20 @@
     "dropzone": "^5.7.2",
     "highlight.js": "^10.1.1",
     "hyperapp": "1.2.10",
+    "hyperapp-redux-devtools": "^1.1.6",
     "hyperapp-styled-components": "0.1.0",
     "icon-sdk-js": "0.0.18",
     "jsoneditor": "^9.0.3",
     "lib": "^4.3.0",
+    "normalize": "^0.3.1",
     "parcel": "^1.12.4",
     "qrcode-with-logos": "^1.0.2",
     "regenerator-runtime": "^0.13.7",
     "request": "^2.88.2",
     "slim-select": "^1.26.0",
     "then-request": "^6.0.2"
+  },
+  "devDependencies": {
+    "hyperapp-redux-devtools": "1.1.6"
   }
 }
