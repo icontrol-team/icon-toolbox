@@ -84,7 +84,7 @@ export default ({state, actions}) => {
                 {/*        </div>*/}
                 {/*    </li>*/}
                 {/*</ul>*/}
-                {/*<br/>*/}
+                <br/>
                 <div id="jsoneditor" style="width: 100%; height:400px">
                 </div>
             </div>

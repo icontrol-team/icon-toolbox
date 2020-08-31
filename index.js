@@ -24,6 +24,7 @@ import 'highlight.js/styles/github.css'
 import './lib/Styles/slimselect.min.css'
 import "./lib/Styles/dropzone.css"
 import './lib/Styles/SpoqaHanSans-kr.css'
+import {APP_VERSION} from "./lib/config";
 
 import {
     Wrapper,
@@ -113,7 +114,7 @@ const navi_element = (pathname, menu_name, state_loc) => {
 
 const Code = () => (state, actions, v = page_in(state)) => (
 <div style='width: 100%;'>
-    <Column style='width:45%'>
+    <Column style='width:48%'>
         <Column id='cssmenu'>
             <Navigation >
                 {navi_element('/units', 'Units', state.location.pathname)}
@@ -122,8 +123,9 @@ const Code = () => (state, actions, v = page_in(state)) => (
                 {navi_element('/keys', 'Keys', state.location.pathname)}
             </Navigation>
         </Column>
-        <Setting id='setting' >
-            <legend> Settings</legend>
+
+        <div class="fieldset" id='setting' >
+            <legend><span> Settings </span></legend>
             <Title> network: </Title>
             <div class="inline">
                 <select style='width:160px' class='tight' onchange={e => {
@@ -150,10 +152,12 @@ const Code = () => (state, actions, v = page_in(state)) => (
             <div id='setting' >
             </div>
             <div id='setting_result' style='overflow-x: scroll; height:90px'> </div>
-        </Setting>
+            {/*<div id='setting_result' style='overflow-x: scroll; min-height:90px;max-height:300px '> </div>*/}
+        </div>
+
     </Column>
     <Wrapper>
-        <Column style='display: flex; flex-direction: column; width: 100%;overflow:auto;'>
+        <Column style='position:relative;flex-direction: column; width: 100%;overflow:auto;'>
         <div>
             <Route path='/' render={() => () => (
             <div>
@@ -170,7 +174,7 @@ const Code = () => (state, actions, v = page_in(state)) => (
     </Wrapper>
     <SettingPage id='setting'>
         <legend> Logging</legend>
-        <h1>ICON-ToolBox</h1>
+        <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
         <small style='margin-top: -15px'> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
     </SettingPage>
     <Logging id='logging'>{state.logging.concat(state.errors)
