@@ -7,9 +7,6 @@ This tool is intended to help developers develop. <br>
 All functions are implemented in javascript and can be executed without a server.
    
 
-![exec_icontoolbox](img/icontoolbox-v2.gif)
-
-
 ### Supported functions
 1. Generate to QR-CODE
 2. Unit Converter 
