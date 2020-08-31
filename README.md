@@ -33,11 +33,13 @@ All functions are implemented in javascript and can be executed without a server
 
 ### How to settings
 1. network setting
+
 You can set the network, you can also test while the network.
 It is possible to define additional users in addition to the values of (mainnet, testnet, bicon, zicon) which are basically set.
 ![exec_network_setting](img/howtosetting.gif)   
 
 2. KeyStore  setting
+
 You can create a transaction after importing the keystore file.
 ![exec_keystore_setting](img/icontoolbox-sign.gif)   
 
