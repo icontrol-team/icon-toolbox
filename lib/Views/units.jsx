@@ -1,7 +1,17 @@
 import { h } from "hyperapp";
 import {Route} from "@hyperapp/router";
 import {Button, InputBox, Title} from "../Styles";
-import {content_remove_element, getIdValue, putIdValue, convert_hex_form, unixtime2date, base64encode, logging_msg} from "../icx-utils";
+import {
+    content_remove_element,
+    getIdValue,
+    putIdValue,
+    convert_hex_form,
+    unixtime2date,
+    date2unixtime,
+    base64encode,
+    base64decode,
+    logging_msg
+} from "../icx-utils";
 
 const route = (pathname, e=null) => {
     window.scrollTo(0, 0);
@@ -33,7 +43,7 @@ export default ({state, actions}) =>{
                 <InputBox type="text" id="unixtime_ms_value"  style="width:120px" placeholder="Unixtime(ms)" onkeyup={
                     e => {
                         let changed_date = unixtime2date(e.target.value || '', true);
-                        putIdValue('unixtime_value', parseInt(e.target.value / 1000) );
+                        putIdValue('unixtime_value', parseInt(e.target.value/1000) );
                         putIdValue('unixtime2date_value', changed_date);
                     }
                 }  onchange={
