@@ -52,20 +52,34 @@ export default ({state, actions}) => {
             <div id="jsoneditor_layer" style="position: relative" className="jsoneditor_class">
                 <div className="flex-box">
                     <div style="width:250px;">
-                        <select onchange={e => {
-                            changed_setting()
-                        }} id="methods">{
-                            // Object.keys(icon_methods_template).map((group, ii) =>(
-                            Object.keys(new iconTemplateMethod().get()).map((group, ii) => (
+
+                         <select onchange={e => {changed_setting()}} id="methods">
+                             {Object.keys(state.template_obj.get()).map((group, ii) => (
                                     <optgroup label={group}>{
-                                        // Object.keys(icon_methods_template[group]).map((v, ii) =>
-                                        Object.keys(new iconTemplateMethod().get_group(group)).map((v, ii) =>
+                                        Object.keys(state.template_obj.get_group(group)).map((v, ii) =>
                                             (<option value={v}>{v}</option>)
                                         )
                                     }</optgroup>
                                 )
                             )
                         }</select>
+
+                        {/*<select onchange={e => {*/}
+                        {/*    changed_setting()*/}
+                        {/*}} id="methods">*/}
+
+                        {/*    {*/}
+                        {/*    Object.keys(state.template_obj.get()).map((group, ii) => (*/}
+                        {/*            <optgroup label={group}>{*/}
+                        {/*                // Object.keys(icon_methods_template[group]).map((v, ii) =>*/}
+                        {/*                Object.keys(state.template_obj.get_group(group)).map((v, ii) =>*/}
+                        {/*                    (<option value={v}>{v}</option>)*/}
+                        {/*                )*/}
+                        {/*            }</optgroup>*/}
+                        {/*        )*/}
+                        {/*    )*/}
+
+                        {/*}</select>*/}
                     </div>
                     <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.sign()} id="sign_btn">sign</Button>
                     <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.call_api_payload()}>call_api</Button>
@@ -97,6 +111,7 @@ export default ({state, actions}) => {
                     } placeholder="input TxHash"> </InputBox>
                 </div>
                 <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.icx_getTransactionResult()}>getTXResult</Button>
+                <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.icx_getTransactionByHash()}>getTX</Button>
 
             </div>
         </div>

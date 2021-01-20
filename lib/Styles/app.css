@@ -205,7 +205,7 @@ h4 {
 
 table caption {
     padding: 10px;
-    background: #47c9af;
+    background: linear-gradient(90deg, #9B46DD 0%, #3D8DD6 98.44%);
     font-weight: bold;
     font-size: 1.1em;
     margin-left: -1px; /* Fix FF 1px issue */
@@ -242,7 +242,7 @@ table caption {
 }
 #cssmenu {
     width: auto;
-    border-bottom: 3px solid #47c9af;
+    border-bottom: 3px solid #9B46DD;
     font-family: Raleway, sans-serif;
     line-height: 1;
 }
@@ -310,7 +310,7 @@ table caption {
 #cssmenu > ul > li.active > a:after,
 #cssmenu > ul > li:hover > a:after,
 #cssmenu > ul > li > a:hover:after {
-    background: #47c9af;
+    background: linear-gradient(90deg, #9B46DD 0%, #3D8DD6 98.44%);
 }
 body {
     padding: 0px;
@@ -384,10 +384,10 @@ pre, code {
 /* dark styling of the editor */
 div.jsoneditor,
 div.jsoneditor-menu {
-    border-color: #47c9af;
+    border-color: #9B46DD;
 }
 div.jsoneditor-menu {
-    background-color: #47c9af;
+    background: linear-gradient(90deg, #9B46DD 0%, #3D8DD6 98.44%);
 }
 
 /*div.jsoneditor-tree,*/

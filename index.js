@@ -39,8 +39,21 @@ import {
 import Units from './lib/Views/units'
 import QRcode from './lib/Views/qrcode'
 import Api from './lib/Views/api'
+import INS from './lib/Views/ins'
 import Keys from './lib/Views/keys'
 import Footer from './lib/Views/footer'
+
+import * as Sentry from "@sentry/browser";
+import { Integrations } from "@sentry/tracing";
+
+Sentry.init({
+    dsn: 'https://79fc0f30841d4d20829a7456c2e7bf0b@o335249.ingest.sentry.io/5517666',
+    integrations: [
+        new Integrations.BrowserTracing(),
+    ],
+
+    tracesSampleRate: 0.1,
+});
 
 const route = (pathname, e=null) => {
     window.scrollTo(0, 0);
@@ -57,7 +70,7 @@ const state = {
     last_network: window.localStorage.getItem("last_network") || "zicon" ,
     last_keystore: "",
     logging: [
-        "<span>Welcome to ICON-ToolBox - ICONTROL Team </span>",
+        "<span>Welcome to ICON-ToolBox "+APP_VERSION +" - ICONTROL Team </span>",
     ],
     abi: {},
     timestamp: Math.round(new Date().getTime()/1000),
@@ -71,6 +84,8 @@ const state = {
     }),
     payload:{},
     errors: [],
+    template_obj: new iconTemplateMethod()
+
 };
 
 global.state = state;
@@ -113,87 +128,92 @@ const navi_element = (pathname, menu_name, state_loc) => {
 
 
 const Code = () => (state, actions, v = page_in(state)) => (
-<div style='width: 100%;'>
-    <Column style='width:48%'>
-        <Column id='cssmenu'>
-            <Navigation >
-                {navi_element('/units', 'Units', state.location.pathname)}
-                {navi_element('/qrcode', 'QRcode', state.location.pathname)}
-                {navi_element('/api', 'API', state.location.pathname)}
-                {navi_element('/keys', 'Keys', state.location.pathname)}
-            </Navigation>
+    <div style='width: 100%;'>
+        <Column style='width:48%'>
+            <Column id='cssmenu'>
+                <Navigation >
+                    {navi_element('/units', 'Units', state.location.pathname)}
+                    {navi_element('/qrcode', 'QRcode', state.location.pathname)}
+                    {navi_element('/ins', 'INS', state.location.pathname)}
+                    {navi_element('/api', 'API', state.location.pathname)}
+                    {navi_element('/keys', 'Keys', state.location.pathname)}
+                </Navigation>
+            </Column>
+
+            <div class="fieldset" id='setting' >
+                <legend><span> Settings </span></legend>
+                <Title> network: </Title>
+                <div class="inline">
+                    <select style='width:160px' class='tight' onchange={e => {
+                        changed_setting(e);
+                        state.last_network = e.target.value;
+                    }} id='network'>{
+                        Object.keys(state.network_info).map((v, i) =>
+                            state.last_network === v ? (<option value={v} selected>{v}</option>)
+                                : (<option value={v}> {v}</option>)
+                        )
+                    }</select>
+                </div>
+                <div class="inline">
+                    <select style='width:200px' class='tight' onchange={e => {
+                        getKeystore(e);
+                        state.last_keystore = e.target.value;
+                        window.localStorage.setItem('last_keystore', e.target.value);
+                    }} id='keystore_sel'>{
+                        Object.keys(state.keystore_info).map((v, i) =>
+                            (<option value={v}>{v} &nbsp;<small style='font-style: italic;'>
+                                {icx_utils.ellipsis_start_and_end(state.keystore_info[v].address)}</small>
+                            </option>)
+                        )
+                    }</select>
+                </div>
+                <div id='setting' >
+                </div>
+                <div id='setting_result' style='overflow-x: scroll; height:90px'> </div>
+                {/*<div id='setting_result' style='overflow-x: scroll; min-height:90px;max-height:300px '> </div>*/}
+            </div>
+
         </Column>
-
-        <div class="fieldset" id='setting' >
-            <legend><span> Settings </span></legend>
-            <Title> network: </Title>
-            <div class="inline">
-                <select style='width:160px' class='tight' onchange={e => {
-                    changed_setting(e);
-                    state.last_network = e.target.value;
-                }} id='network'>{
-                    Object.keys(state.network_info).map((v, i) =>
-                        state.last_network === v ? (<option value={v} selected>{v}</option>)
-                            : (<option value={v}> {v}</option>)
-                    )
-                }</select>
-            </div>
-            <div class="inline">
-                <select style='width:140px' class='tight' onchange={e => {
-                    getKeystore(e);
-                    state.last_keystore = e.target.value;
-                    window.localStorage.setItem('last_keystore', e.target.value);
-                }} id='keystore_sel'>{
-                    Object.keys(state.keystore_info).map((v, i) =>
-                        (<option value={v}>{v} &nbsp;<small style='font-style: italic;'> {state.keystore_info[v].address}</small></option>)
-                    )
-                }</select>
-            </div>
-            <div id='setting' >
-            </div>
-            <div id='setting_result' style='overflow-x: scroll; height:90px'> </div>
-            {/*<div id='setting_result' style='overflow-x: scroll; min-height:90px;max-height:300px '> </div>*/}
-        </div>
-
-    </Column>
-    <Wrapper>
-        <Column style='position:relative;flex-direction: column; width: 100%;overflow:auto;'>
-        <div>
-            <Route path='/' render={() => () => (
+        <Wrapper>
+            <Column style='position:relative;flex-direction: column; width: 100%;overflow:auto;'>
             <div>
-                {route('/units')}
+                <Route path='/' render={() => () => (
+                <div>
+                    {route('/units')}
+                </div>
+                )} />
+                <Units state={state} actions={actions}/>
+                <QRcode state={state} actions={actions}/>
+                <INS state={state} actions={actions}/>
+                <Api state={state} actions={actions}/>
+                <Keys state={state} actions={actions}/>
             </div>
-            )} />
-            <Units state={state} actions={actions}/>
-            <QRcode state={state} actions={actions}/>
-            <Api state={state} actions={actions}/>
-            <Keys state={state} actions={actions}/>
-        </div>
-            <Footer state={state} actions={actions}/>
-      </Column>
-    </Wrapper>
-    <SettingPage id='setting'>
-        <legend> Logging</legend>
-        <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
-        <small style='margin-top: -15px'> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
-    </SettingPage>
-    <Logging id='logging'>{state.logging.concat(state.errors)
-      .map((v, i) => (<div style='border: 1px solid #ededed; padding:8px' innerHTML={v}> </div>))}
-    {/*<legend>Logging</legend>*/}
-    </Logging>
+                <Footer state={state} actions={actions}/>
+          </Column>
+        </Wrapper>
+        <SettingPage id='setting'>
+            <legend> Logging</legend>
+            <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
+            <small style='margin-top: -15px'> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
+        </SettingPage>
+        <Logging id='logging'>{state.logging.concat(state.errors)
+          .map((v, i) => (<div style='border: 1px solid #ededed; padding:8px' innerHTML={v}> </div>))}
+        {/*<legend>Logging</legend>*/}
+        </Logging>
 
-    <Console placeholder='' onkeyup={e => {
-      if (e.keyCode === 13) {
-        e.preventDefault();
-        actions.console(e.target.value);
-      }
-    }}> </Console>
-</div>
+        <Console placeholder='' onkeyup={e => {
+          if (e.keyCode === 13) {
+            e.preventDefault();
+            actions.console(e.target.value);
+          }
+        }}> </Console>
+    </div>
 );
 
 const Routes = () => (
     <Switch>
         <Route path='/' render={Code} />
+        <Route path='/ins' render={Code} />
         <Route path='/units' render={Code} />
         <Route path='/qrcode' render={Code} />
         <Route path='/api' render={Code} />
@@ -202,7 +222,6 @@ const Routes = () => (
         <Route render={NotFound} />
     </Switch>
 );
-
 
 const devtools = process.env.NODE_ENV === 'development'
     ? require('hyperapp-redux-devtools')
@@ -230,10 +249,8 @@ icx_utils.set_network().then(function(data) {
             document.body
         );
     }
-
-
     const unsubscribe = location.subscribe(main.location);
-    console.log('location: ' , location)
+    // console.log('location: ' , location)
 });
 
 

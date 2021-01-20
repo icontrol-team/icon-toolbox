@@ -16,6 +16,8 @@
   "license": "MIT",
   "dependencies": {
     "@hyperapp/router": "^0.7.2",
+    "@sentry/browser": "^5.27.4",
+    "@sentry/tracing": "^5.27.4",
     "app.css": "^0.1.2",
     "axios": "^0.19.2",
     "big-integer": "^1.6.48",
@@ -39,6 +41,7 @@
     "then-request": "^6.0.2"
   },
   "devDependencies": {
+    "electron": "11.1.1",
     "hyperapp-redux-devtools": "1.1.6"
   }
 }
