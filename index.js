@@ -11,7 +11,7 @@ import {
     getStorageValue,
     iconTemplateMethod,
     getKeystore,
-    changed_setting,
+    changed_setting, tx_sign,
 } from "./lib/icx-utils";
 import {serialize} from "icon-sdk-js/lib/data/Util";
 import { actions } from './lib/Actions'
@@ -46,6 +46,8 @@ import Footer from './lib/Views/footer'
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
 
+
+
 Sentry.init({
     dsn: 'https://79fc0f30841d4d20829a7456c2e7bf0b@o335249.ingest.sentry.io/5517666',
     integrations: [
@@ -68,7 +70,7 @@ const state = {
     location: location.state,
     error: null,
     last_network: window.localStorage.getItem("last_network") || "zicon" ,
-    last_keystore: "",
+    last_keystore: window.localStorage.getItem("last_keystore") || "" ,
     logging: [
         "<span>Welcome to ICON-ToolBox "+APP_VERSION +" - ICONTROL Team </span>",
     ],
@@ -83,6 +85,8 @@ const state = {
         timeZone: 'UTC',
     }),
     payload:{},
+    selected_method: "",
+    selected_group: "",
     errors: [],
     template_obj: new iconTemplateMethod()
 
@@ -159,11 +163,18 @@ const Code = () => (state, actions, v = page_in(state)) => (
                         getKeystore(e);
                         state.last_keystore = e.target.value;
                         window.localStorage.setItem('last_keystore', e.target.value);
+                        tx_sign();
+
                     }} id='keystore_sel'>{
                         Object.keys(state.keystore_info).map((v, i) =>
-                            (<option value={v}>{v} &nbsp;<small style='font-style: italic;'>
-                                {icx_utils.ellipsis_start_and_end(state.keystore_info[v].address)}</small>
-                            </option>)
+                            state.last_keystore === v
+                                ?
+                                (<option value={v} selected>{v} &nbsp;<small style='font-style: italic;'>
+                                    {icx_utils.ellipsis_start_and_end(state.keystore_info[v].address)}</small>
+                                </option>)  :
+                                (<option value={v}>{v} &nbsp;<small style='font-style: italic;'>
+                                    {icx_utils.ellipsis_start_and_end(state.keystore_info[v].address)}</small>
+                                </option>)
                         )
                     }</select>
                 </div>
@@ -259,9 +270,7 @@ function waitForDomReady() {
         window.requestAnimationFrame(waitForDomReady);
     }else {
         changed_setting();
-        // logging_msg('keystore: '+ getKeystore().address);
         if (icx_utils.getClass('jsoneditor-poweredBy')) {
-            console.log("Remove Key");
             icx_utils.getClass('jsoneditor-poweredBy').item(0).remove();
         }
     }

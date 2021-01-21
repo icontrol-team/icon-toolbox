@@ -8,8 +8,13 @@ export default ({state, actions}) => {
             <div>
                 <h4>ICON Name Service testing tools</h4>
                 <div style="position: relative;">
-                    <Title> INS : </Title><InputBox type="text" id="ins_address" style="" placeholder="INS or ICON address (hx)"/>
-                    <Button onclick={() => actions.get_ins_address()}>Get INS address</Button>
+                    <Title> INS : </Title>
+                    <InputBox type="text" id="ins_address" style="" placeholder="INS or ICON address (hx)"
+                      onkeypress={e => (e.keyCode === 13 ? actions.get_ins_address(): null)}
+                    />
+                    <Button
+                        onclick={() => actions.get_ins_address()}
+                    >Get INS address</Button>
                 </div>
                 <div id="ins_result_layer">
                     <div id="ins_result">

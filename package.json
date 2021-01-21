@@ -32,6 +32,7 @@
     "icon-sdk-js": "0.0.18",
     "jsoneditor": "^9.0.3",
     "lib": "^4.3.0",
+    "lodash": "^4.17.20",
     "normalize": "^0.3.1",
     "parcel": "^1.12.4",
     "qrcode-with-logos": "^1.0.2",

@@ -49,7 +49,7 @@ export default ({state, actions}) => {
                 state.location.pathname === "/api" ? "display:block" :
                     state.location.pathname === "/units" ? "display:block" : "display:none"
         }>
-            <div id="jsoneditor_layer" style="position: relative" className="jsoneditor_class">
+            <div id="jsoneditor_layer" style="position: relative" classname="jsoneditor_class">
                 <div className="flex-box">
                     <div style="width:250px;">
 
