@@ -9,14 +9,75 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+.tool_panel{
+    margin-left: 20px;
+    padding-bottom: 100px;
+    width: 48%;
+}
+
+.tool_control_panel{
+    /*background-color: #8a8a8a;*/
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    overflow: scroll;
+    bottom: 0px;
+    flex-wrap: wrap;
+    max-height: 99%;
+    position: fixed;
+    top: 230px;
+}
+
+
+@media screen and (max-width : 500px) {
+    .mobile_hide
+    {
+        display: none;
+    }
+    .tool_panel {
+        width: 93%;
+    }
+    .tool_control_panel{
+        width: 93%;
+        top: 240px;
+    }
+}
+
+@media screen and (min-width : 501px) and (max-width : 700px){
+    .tool_control_panel{
+        top: 350px;
+    }
+}
+
+@media screen and (min-width : 701px) and (max-width : 800px){
+    .tool_control_panel{
+        top: 335px;
+    }
+}
+
+@media screen and (min-width : 801px) and (max-width : 1016px){
+    .tool_control_panel{
+        top: 290px;
+    }
+}
+
+.selectbox_dyn{
+    width: 150px !important;
+    margin: 0px;
+    padding: 0px;
+}
+
+
 .fieldset {
     border: 1px solid #ccc;
     border-top: none;
     padding: 0.5em;
     margin: 1em 2px;
+
     /*display: inline-block;*/
     /*position: relative;*/
-    /*min-width: 300px;*/
+    /*min-width: 500px;*/
 }
 
 .fieldset>legend {

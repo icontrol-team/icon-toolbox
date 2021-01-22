@@ -133,7 +133,7 @@ const navi_element = (pathname, menu_name, state_loc) => {
 
 const Code = () => (state, actions, v = page_in(state)) => (
     <div style='width: 100%;'>
-        <Column style='width:48%'>
+        <div class="tool_panel">
             <Column id='cssmenu'>
                 <Navigation >
                     {navi_element('/units', 'Units', state.location.pathname)}
@@ -148,7 +148,7 @@ const Code = () => (state, actions, v = page_in(state)) => (
                 <legend><span> Settings </span></legend>
                 <Title> network: </Title>
                 <div class="inline">
-                    <select style='width:160px' class='tight' onchange={e => {
+                    <select style="width:140px" class='tight' onchange={e => {
                         changed_setting(e);
                         state.last_network = e.target.value;
                     }} id='network'>{
@@ -156,9 +156,7 @@ const Code = () => (state, actions, v = page_in(state)) => (
                             state.last_network === v ? (<option value={v} selected>{v}</option>)
                                 : (<option value={v}> {v}</option>)
                         )
-                    }</select>
-                </div>
-                <div class="inline">
+                    }</select> &nbsp;
                     <select style='width:200px' class='tight' onchange={e => {
                         getKeystore(e);
                         state.last_keystore = e.target.value;
@@ -184,8 +182,8 @@ const Code = () => (state, actions, v = page_in(state)) => (
                 {/*<div id='setting_result' style='overflow-x: scroll; min-height:90px;max-height:300px '> </div>*/}
             </div>
 
-        </Column>
-        <Wrapper>
+        </div>
+        <div class="tool_control_panel">
             <Column style='position:relative;flex-direction: column; width: 100%;overflow:auto;'>
             <div>
                 <Route path='/' render={() => () => (
@@ -201,23 +199,25 @@ const Code = () => (state, actions, v = page_in(state)) => (
             </div>
                 <Footer state={state} actions={actions}/>
           </Column>
-        </Wrapper>
-        <SettingPage id='setting'>
-            <legend> Logging</legend>
-            <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
-            <small style='margin-top: -15px'> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
-        </SettingPage>
-        <Logging id='logging'>{state.logging.concat(state.errors)
-          .map((v, i) => (<div style='border: 1px solid #ededed; padding:8px' innerHTML={v}> </div>))}
-        {/*<legend>Logging</legend>*/}
-        </Logging>
+        </div>
+        <div class="mobile_hide">
+            <SettingPage id='setting'>
+                <legend> Logging</legend>
+                <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
+                <small style='margin-top: -15px'> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
+            </SettingPage>
+            <Logging id='logging'>{state.logging.concat(state.errors)
+              .map((v, i) => (<div style='border: 1px solid #ededed; padding:8px' innerHTML={v}> </div>))}
+            {/*<legend>Logging</legend>*/}
+            </Logging>
 
-        <Console placeholder='' onkeyup={e => {
-          if (e.keyCode === 13) {
-            e.preventDefault();
-            actions.console(e.target.value);
-          }
-        }}> </Console>
+            <Console placeholder='' onkeyup={e => {
+              if (e.keyCode === 13) {
+                e.preventDefault();
+                actions.console(e.target.value);
+              }
+            }}> </Console>
+        </div>
     </div>
 );
 
