@@ -26,7 +26,7 @@
     flex-wrap: wrap;
     max-height: 99%;
     position: fixed;
-    top: 230px;
+    top: 290px;
 }
 
 
@@ -56,11 +56,18 @@
     }
 }
 
-@media screen and (min-width : 801px) and (max-width : 1016px){
+@media screen and (min-width : 801px) and (max-width : 1010px){
     .tool_control_panel{
         top: 290px;
     }
 }
+
+@media screen and (min-width : 1080px){
+    .tool_control_panel{
+        top: 250px;
+    }
+}
+
 
 .selectbox_dyn{
     width: 150px !important;
