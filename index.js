@@ -134,6 +134,7 @@ const navi_element = (pathname, menu_name, state_loc) => {
 const Code = () => (state, actions, v = page_in(state)) => (
     <div style='width: 100%;'>
         <div class="tool_panel">
+        {/*<Column style="width: 48%">*/}
             <Column id='cssmenu'>
                 <Navigation >
                     {navi_element('/units', 'Units', state.location.pathname)}
@@ -148,7 +149,7 @@ const Code = () => (state, actions, v = page_in(state)) => (
                 <legend><span> Settings </span></legend>
                 <Title> network: </Title>
                 <div class="inline">
-                    <select style="width:140px" class='tight' onchange={e => {
+                    <select style="width:150px" class='tight' onchange={e => {
                         changed_setting(e);
                         state.last_network = e.target.value;
                     }} id='network'>{
@@ -156,8 +157,10 @@ const Code = () => (state, actions, v = page_in(state)) => (
                             state.last_network === v ? (<option value={v} selected>{v}</option>)
                                 : (<option value={v}> {v}</option>)
                         )
-                    }</select> &nbsp;
-                    <select style='width:200px' class='tight' onchange={e => {
+                    }</select>
+                </div>
+                <div class="inline">
+                    <select style='width:240px' class='tight' onchange={e => {
                         getKeystore(e);
                         state.last_keystore = e.target.value;
                         window.localStorage.setItem('last_keystore', e.target.value);
@@ -184,6 +187,7 @@ const Code = () => (state, actions, v = page_in(state)) => (
 
         </div>
         <div class="tool_control_panel">
+        {/*<Wrapper>*/}
             <Column style='position:relative;flex-direction: column; width: 100%;overflow:auto;'>
             <div>
                 <Route path='/' render={() => () => (
