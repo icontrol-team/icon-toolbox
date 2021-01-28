@@ -353,7 +353,7 @@ table caption {
 #cssmenu > ul > li:hover > a,
 #cssmenu > ul > li > a:hover {
     color: white;
-    filter: alpha(opacity=50) !important;
+    filter: alpha(opacity=50);
     opacity: 0.5;
 
 }
