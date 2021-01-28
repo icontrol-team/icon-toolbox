@@ -17,13 +17,13 @@
 
 .tool_control_panel{
     /*background-color: #8a8a8a;*/
-    padding-top: 30px;
+    margin-top:10px;
+    padding-top: 10px;
     padding-left: 25px;
     display: flex;
     flex-direction: row;
     width: 45%;
     overflow: scroll;
-    bottom: 0px;
     flex-wrap: wrap;
     max-height: 99%;
     position: fixed;
@@ -81,7 +81,7 @@
     border: 1px solid #ccc;
     border-top: none;
     padding: 0.5em;
-    margin: 1em 2px;
+    margin: 0.5em 2px;
     /*display: inline-block;*/
     /*position: relative;*/
     /*min-width: 500px;*/
@@ -313,6 +313,7 @@ table caption {
     border-bottom: 3px solid #9B46DD;
     font-family: Raleway, sans-serif;
     line-height: 1;
+    margin-bottom: 15px;
 }
 #cssmenu ul {
     background: #ffffff;
@@ -349,11 +350,18 @@ table caption {
     transition: all .2s ease;
     margin-right: -4px;
 }
-#cssmenu > ul > li.active > a,
 #cssmenu > ul > li:hover > a,
 #cssmenu > ul > li > a:hover {
-    color: #ffffff;
+    color: white;
+    filter: alpha(opacity=50) !important;
+    opacity: 0.5;
+
 }
+
+#cssmenu > ul > li.active > a{
+    color: white;
+}
+
 #cssmenu > ul > li > a:after {
     position: absolute;
     left: 0;
