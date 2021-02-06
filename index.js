@@ -274,9 +274,9 @@ function waitForDomReady() {
         window.requestAnimationFrame(waitForDomReady);
     }else {
         changed_setting();
-        if (icx_utils.getClass('jsoneditor-poweredBy')) {
-            icx_utils.getClass('jsoneditor-poweredBy').item(0).remove();
-        }
+        // if (icx_utils.getClass('jsoneditor-poweredBy')) {
+        //     icx_utils.getClass('jsoneditor-poweredBy').item(0).remove();
+        // }
     }
 }
 
