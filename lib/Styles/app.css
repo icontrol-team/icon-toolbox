@@ -51,11 +51,19 @@
     .tool_control_panel{
         top: 350px;
     }
+
+    .setting_page{
+        line-height: 130%;
+    }
+
 }
 
 @media screen and (min-width : 701px) and (max-width : 800px){
     .tool_control_panel{
         top: 335px;
+    }
+    .setting_page{
+        line-height: 130%;
     }
 }
 

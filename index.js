@@ -34,7 +34,8 @@ import {
     Logging,
     Navigation,
     Setting,
-    SettingPage} from './lib/Styles';
+    SettingPage, Button
+} from './lib/Styles';
 
 import Units from './lib/Views/units'
 import QRcode from './lib/Views/qrcode'
@@ -204,11 +205,15 @@ const Code = () => (state, actions, v = page_in(state)) => (
                 <Footer state={state} actions={actions}/>
           </Column>
         </div>
-        <div class="mobile_hide">
-            <SettingPage id='setting'>
+        <div class="mobile_hide" >
+            <SettingPage id='setting' >
                 <legend> Logging</legend>
+                <div style="margin-top: -15px" className="setting_page">
                 <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
-                <small style='margin-top: -15px'> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
+
+                <small style=''> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
+                    <Button style='margin-left:150px' onclick={() => actions.clear_logging()}>clear log</Button>
+                </div>
             </SettingPage>
             <Logging id='logging'>{state.logging.concat(state.errors)
               .map((v, i) => (<div style='border: 1px solid #ededed; padding:8px' innerHTML={v}> </div>))}
