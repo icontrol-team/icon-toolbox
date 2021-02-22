@@ -1,5 +1,5 @@
 import { h } from "hyperapp";
-import {Button, GroupField, InputBox} from "../Styles";
+import {Button, PurpleButton, GroupField, InputBox} from "../Styles";
 
 import {iconTemplateMethod, changed_setting} from '../icx-utils';
 
@@ -83,6 +83,7 @@ export default ({state, actions}) => {
                     </div>
                     <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.sign()} id="sign_btn">sign</Button>
                     <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.call_api_payload()}>call_api</Button>
+                    <PurpleButton style='' onclick={() => actions.sign_call_api_payload()}>sign call_api</PurpleButton>
                 </div>
 
                 {/*<ul id="dynamic_convertor" className="collapse-list">*/}
