@@ -30,13 +30,13 @@ export default ({state, actions}) => {
                             <legend>If you want to generate by private key</legend>
                             <div className='flex-box'>
                                 <input className="password" type="text" id="private_key" style="width:210px; " placeholder="Private Key" autoComplete="off"/>
-                                <Button style="" onclick={actions.import_privateKey}>Generate by PK</Button>
+                                <Button style="" onclick={actions.import_privateKey}>Generate Key by PK</Button>
                             </div>
 
                             <legend>If you want to generate by password</legend>
                             <div className='flex-box'>
                                 <input className="password" type="text" id="key_password" style="width:210px; " placeholder="password" autoComplete="off"/>
-                                <Button style="" onclick={actions.generateKey}>Generate by password</Button>
+                                <Button style="" onclick={actions.generateKey}>Generate Key by password</Button>
                             </div>
                             <br/> <br/>
                         </GroupField>
