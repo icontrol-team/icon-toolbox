@@ -24,6 +24,7 @@
     "bigfloat.js": "^2.0.2",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "is-svg":"^4.2.2",
     "dropzone": "^5.7.2",
     "highlight.js": "^10.4.1",
     "hyperapp": "1.2.10",
@@ -39,15 +40,17 @@
     "regenerator-runtime": "^0.13.7",
     "request": "^2.88.2",
     "slim-select": "^1.27.0",
-    "then-request": "^6.0.2"
+    "then-request": "^6.0.2",
+    "y18n": ">=4.0.1"
   },
   "devDependencies": {
     "electron": "11.1.1",
-    "hyperapp-redux-devtools": "1.1.6"
+    "hyperapp-redux-devtools": "1.1.6",
+    "y18n": ">=4.0.1"
   },
   "resolutions": {
     "browserslist": "4.14.4",
     "caniuse-lite": "1.0.30001129",
-    "node-forge": "0.10.0"
+    "node-forge": ">=0.10.0"
   }
 }

@@ -68,6 +68,7 @@ const route = (pathname, e=null) => {
 const state = {
     // init: false,
     keystore_info: [],
+    auto_reload: false,
     location: location.state,
     error: null,
     last_network: window.localStorage.getItem("last_network") || "zicon" ,
@@ -212,6 +213,8 @@ const Code = () => (state, actions, v = page_in(state)) => (
                 <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
 
                 <small style=''> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
+                    <input type="checkbox" checked={state.auto_reload} onclick={() => actions.check_auto_reload()}/>
+                    <span id="auto_reload_text"> auto reload </span>
                     <Button style='margin-left:150px' onclick={() => actions.clear_logging()}>clear log</Button>
                 </div>
             </SettingPage>
