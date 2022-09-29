@@ -166,7 +166,7 @@ const Code = () => (state, actions, v = page_in(state)) => (
                         getKeystore(e);
                         state.last_keystore = e.target.value;
                         window.localStorage.setItem('last_keystore', e.target.value);
-                        tx_sign();
+                        // tx_sign();
 
                     }} id='keystore_sel'>{
                         Object.keys(state.keystore_info).map((v, i) =>
