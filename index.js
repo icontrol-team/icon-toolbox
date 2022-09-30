@@ -69,6 +69,7 @@ const state = {
     // init: false,
     keystore_info: [],
     auto_reload: false,
+    calculate_fee: false,
     location: location.state,
     error: null,
     last_network: window.localStorage.getItem("last_network") || "zicon" ,
