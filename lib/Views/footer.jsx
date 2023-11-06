@@ -117,6 +117,7 @@ export default ({state, actions}) => {
                 </div>
                 <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.icx_getTransactionResult()}>getTXResult</Button>
                 <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.icx_getTransactionByHash()}>getTX</Button>
+                <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.debug_getTrace()}>getTrace</Button>
                 <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.getBalance()}>getBalance</Button>
 
             </div>
