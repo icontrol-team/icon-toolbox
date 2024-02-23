@@ -91,8 +91,8 @@ const state = {
     selected_method: "",
     selected_group: "",
     errors: [],
-    template_obj: new iconTemplateMethod()
-
+    template_obj: new iconTemplateMethod(),
+    score_apis_raws: {},
 };
 
 global.state = state;
@@ -282,6 +282,7 @@ function waitForDomReady() {
     if (!document.getElementById('setting')) {
         window.requestAnimationFrame(waitForDomReady);
     }else {
+        console.log("**************************************************************");
         changed_setting();
         // if (icx_utils.getClass('jsoneditor-poweredBy')) {
         //     icx_utils.getClass('jsoneditor-poweredBy').item(0).remove();

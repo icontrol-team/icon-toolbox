@@ -1,5 +1,5 @@
 import { h } from "hyperapp";
-import {Button, PurpleButton, GroupField, InputBox} from "../Styles";
+import {Button, PurpleButton, GroupField, InputBox, ButtonTight} from "../Styles";
 
 import {iconTemplateMethod, changed_setting} from '../icx-utils';
 
@@ -53,8 +53,10 @@ export default ({state, actions}) => {
                 <div className="flex-box">
                     <div style="width:250px;">
 
-                         <select onchange={e => {changed_setting()}} id="methods">
-                             {Object.keys(state.template_obj.get()).map((group, ii) => (
+                        <select onchange={e => {
+                            changed_setting(null, false)
+                        }} id="methods">
+                            {Object.keys(state.template_obj.get()).map((group, ii) => (
                                     <optgroup label={group}>{
                                         Object.keys(state.template_obj.get_group(group)).map((v, ii) =>
                                             (<option value={v}>{v}</option>)
@@ -62,7 +64,7 @@ export default ({state, actions}) => {
                                     }</optgroup>
                                 )
                             )
-                        }</select>
+                            }</select>
 
                         {/*<select onchange={e => {*/}
                         {/*    changed_setting()*/}
@@ -81,13 +83,14 @@ export default ({state, actions}) => {
 
                         {/*}</select>*/}
                     </div>
-                    <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.sign()} id="sign_btn">sign</Button>
-                    <Button style='height:30px;margin: 10px 0px 0px 0px ' onclick={() => actions.call_api_payload()}>call_api</Button>
+                    <ButtonTight  onclick={() => actions.sign()} id="sign_btn">sign</ButtonTight>
+                    <ButtonTight onclick={() => actions.call_api_payload()}>call_api</ButtonTight>
                     <PurpleButton style='' onclick={() => actions.sign_call_api_payload()}>sign call_api</PurpleButton>
-                    <br/>
-                    <input type="checkbox" checked={state.calculate_fee} onclick={() => actions.check_calculate_fee()} />
-                    <small> Fee </small>
+                    <Button style='height:30px;margin: 10px 0px 0px 0px' onclick={() => changed_setting(null, false)}>↻</Button>
 
+                    <br/>
+                    <input type="checkbox" checked={state.calculate_fee} onclick={() => actions.check_calculate_fee()}/>
+                    <small> Fee </small>
                 </div>
 
                 {/*<ul id="dynamic_convertor" className="collapse-list">*/}

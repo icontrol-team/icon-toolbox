@@ -16,6 +16,7 @@
     width: 48%;
 }
 
+
 .tool_control_panel{
     /*background-color: #8a8a8a;*/
     margin-top:10px;
@@ -32,6 +33,10 @@
     bottom: 1px;
 }
 
+
+.button-tight {
+    height:30px;margin: 10px 0px 0px 0px;
+}
 
 @media screen and (max-width : 500px) {
     .mobile_hide
