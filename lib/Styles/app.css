@@ -16,6 +16,16 @@
     width: 48%;
 }
 
+.banner {
+    position: fixed;
+    bottom: 0;
+    left: 100%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 50px;
+    border: 0;
+    z-index: 1000; /* Ensure the iframe is above other content */
+}
 
 .tool_control_panel{
     /*background-color: #8a8a8a;*/

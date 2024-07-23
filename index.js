@@ -207,40 +207,42 @@ const Code = () => (state, actions, v = page_in(state)) => (
                 <Footer state={state} actions={actions}/>
           </Column>
         </div>
-        <div class="mobile_hide" >
-            <SettingPage id='setting' >
+        <div class="mobile_hide">
+            <SettingPage id='setting'>
                 <legend> Logging</legend>
                 <div style="margin-top: -15px" className="setting_page">
-                <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
+                    <h1>ICON-ToolBox <small>{APP_VERSION}</small></h1>
 
-                <small style=''> powered by  <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
+                    <small style=''> powered by <a href='http://icontrol.id' target='_blank'>ICONTROL</a></small>
                     <input type="checkbox" checked={state.auto_reload} onclick={() => actions.check_auto_reload()}/>
                     <span id="auto_reload_text"> auto reload </span>
                     <Button style='margin-left:150px' onclick={() => actions.clear_logging()}>clear log</Button>
                 </div>
             </SettingPage>
             <Logging id='logging'>{state.logging.concat(state.errors)
-              .map((v, i) => (<div style='border: 1px solid #ededed; padding:8px' innerHTML={v}> </div>))}
-            {/*<legend>Logging</legend>*/}
+                .map((v, i) => (<div style='border: 1px solid #ededed; padding:8px' innerHTML={v}></div>))}
+                {/*<legend>Logging</legend>*/}
             </Logging>
 
             <Console placeholder='' onkeyup={e => {
-              if (e.keyCode === 13) {
-                e.preventDefault();
-                actions.console(e.target.value);
-              }
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    actions.console(e.target.value);
+                }
             }}> </Console>
+            <iframe class="banner" src="https://ads-partners.coupang.com/widgets.html?id=793841&template=carousel&trackingCode=AF0448060&subId=&width=100&height=50&tsource="
+                    width="100" height="50" frameBorder="0" scrolling="no" referrerPolicy="unsafe-url" browsingtopics></iframe>
         </div>
     </div>
 );
 
 const Routes = () => (
     <Switch>
-        <Route path='/' render={Code} />
-        <Route path='/ins' render={Code} />
-        <Route path='/units' render={Code} />
-        <Route path='/qrcode' render={Code} />
-        <Route path='/api' render={Code} />
+        <Route path='/' render={Code}/>
+        <Route path='/ins' render={Code}/>
+        <Route path='/units' render={Code}/>
+        <Route path='/qrcode' render={Code}/>
+        <Route path='/api' render={Code}/>
         <Route path='/keys' render={Code} />
         <Route path='/img' render={ () => {}} />
         <Route render={NotFound} />
