@@ -1,11 +1,14 @@
 {
   "name": "icon-toolbox",
+  "packageManager": "yarn@1.22.19",
   "version": "0.0.1",
   "description": "icon toolbox",
   "main": "index.js",
   "scripts": {
     "start": "parcel ./index.html --host 0.0.0.0 --port 8000",
+    "serve": "npx serve dist",
     "build": "parcel build --no-content-hash ./index.html --public-url https://icontrol-team.github.io/icon-toolbox/dist/",
+    "bbuild": "parcel build --no-content-hash ./index.html --public-url ./ ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
