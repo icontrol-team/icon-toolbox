@@ -9,6 +9,7 @@
     "serve": "npx serve dist",
     "build": "parcel build --no-content-hash ./index.html --public-url https://icontrol-team.github.io/icon-toolbox/dist/",
     "bbuild": "parcel build --no-content-hash ./index.html --public-url ./ ",
+    "deploy": "npm run bbuild &&cp dist/* my-static-site/toolbox/public/ && cd my-static-site/toolbox && yarn deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
